@@ -1,26 +1,59 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg-ivory: #FAF8F5;
+    --bg-cream: #F5EFE6;
+    --bg-sand: #EAE2D5;
+    --burgundy: #6B1724;
+    --burgundy-dark: #500F1A;
+    --burgundy-light: #F8F1F2;
+    --gold: #C2A26F;
+    --gold-light: #F7F3EB;
+    --charcoal: #1F1D1D;
+    --charcoal-soft: #4A4644;
+    --charcoal-muted: #7E7873;
+    --border-beige: #E6DFD5;
+  }
+
+  body {
+    background-color: var(--bg-ivory);
+    color: var(--charcoal);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: -0.01em;
+  }
+
+  h1, h2, h3, h4, .font-serif-luxury {
+    font-family: "Didot", "Bodoni MT", "Cinzel", "Playfair Display", "Cormorant Garamond", "Georgia", serif;
+    letter-spacing: -0.02em;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Custom luxury scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #FAF8F5;
+}
+::-webkit-scrollbar-thumb {
+  background: #D4C7B8;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #6B1724;
+}
+
+/* Utility animations and styling */
+.transition-luxury {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.luxury-card-hover {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.luxury-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px -8px rgba(107, 23, 36, 0.08);
 }
