@@ -44,7 +44,7 @@ export default function Navbar() {
       <div className="bg-[#6B1724] text-[#FAF8F5] py-2 px-4 text-center text-xs tracking-widest uppercase font-medium flex items-center justify-center gap-2">
         <span>Visit our flagship boutique at Dolmen Mall Lahore</span>
         <span className="hidden md:inline">•</span>
-        <span className="hidden md:inline">Complimentary nationwide shipping on orders over Rs. 10,000</span>
+        <span className="hidden md:inline">Handcrafted Jewellery, Bespoke Accessories & Handmade Gifts</span>
       </div>
 
       {/* Main Navbar */}
@@ -62,7 +62,7 @@ export default function Navbar() {
           </div>
 
           {/* Left Navigation Links - Desktop */}
-          <nav className="hidden lg:flex items-center space-x-8 text-sm font-medium tracking-wide">
+          <nav className="hidden lg:flex items-center space-x-7 text-sm font-medium tracking-wide">
             <Link
               href="/shop"
               className={`hover:text-[#6B1724] transition-colors py-1 ${
@@ -72,22 +72,28 @@ export default function Navbar() {
               Shop All
             </Link>
             <Link
-              href="/shop?category=pret-ready-to-wear"
+              href="/shop?category=jewellery"
               className="text-[#1F1D1D] hover:text-[#6B1724] transition-colors"
             >
-              Pret
+              Jewellery
             </Link>
             <Link
-              href="/shop?category=luxury-festive"
+              href="/shop?category=accessories"
               className="text-[#1F1D1D] hover:text-[#6B1724] transition-colors"
             >
-              Festive
+              Accessories
             </Link>
             <Link
-              href="/shop?category=artisanal-shawls"
+              href="/shop?category=handmade-gifts"
               className="text-[#1F1D1D] hover:text-[#6B1724] transition-colors"
             >
-              Shawls
+              Handmade Gifts
+            </Link>
+            <Link
+              href="/shop?category=gift-hampers"
+              className="text-[#1F1D1D] hover:text-[#6B1724] transition-colors"
+            >
+              Gift Hampers
             </Link>
             <Link
               href="/collections"
@@ -215,49 +221,42 @@ export default function Navbar() {
               onClick={() => setMobileMenuOpen(false)}
               className="block text-[#1F1D1D] hover:text-[#6B1724]"
             >
-              Shop All Catalogue
+              Shop All Creations
             </Link>
             <Link
-              href="/shop?category=pret-ready-to-wear"
+              href="/shop?category=jewellery"
               onClick={() => setMobileMenuOpen(false)}
               className="block text-[#1F1D1D] hover:text-[#6B1724]"
             >
-              Pret & Ready-to-Wear
+              Handcrafted Jewellery
             </Link>
             <Link
-              href="/shop?category=luxury-festive"
+              href="/shop?category=accessories"
               onClick={() => setMobileMenuOpen(false)}
               className="block text-[#1F1D1D] hover:text-[#6B1724]"
             >
-              Luxury Festive Couture
+              Bespoke Accessories
             </Link>
             <Link
-              href="/shop?category=artisanal-shawls"
+              href="/shop?category=handmade-gifts"
               onClick={() => setMobileMenuOpen(false)}
               className="block text-[#1F1D1D] hover:text-[#6B1724]"
             >
-              Artisanal Shawls & Stoles
+              Handmade Gifts & Keepsakes
             </Link>
             <Link
-              href="/shop?category=handcrafted-accessories"
+              href="/shop?category=gift-hampers"
               onClick={() => setMobileMenuOpen(false)}
               className="block text-[#1F1D1D] hover:text-[#6B1724]"
             >
-              Handcrafted Accessories & Bags
-            </Link>
-            <Link
-              href="/shop?category=bespoke-jewelry"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block text-[#1F1D1D] hover:text-[#6B1724]"
-            >
-              Bespoke Jewelry
+              Luxury Gift Hampers
             </Link>
             <Link
               href="/collections"
               onClick={() => setMobileMenuOpen(false)}
               className="block text-[#1F1D1D] hover:text-[#6B1724]"
             >
-              Curated Collections
+              Curated Lookbooks
             </Link>
             <Link
               href="/order-tracking"

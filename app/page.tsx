@@ -32,8 +32,8 @@ export default async function HomePage() {
       <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-[#1F1D1D] text-white">
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=85&w=2000"
-            alt="Artisha Autumn Winter Atelier"
+            src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=85&w=2000"
+            alt="Artisha Handcrafted Jewellery, Accessories & Handmade Gifts"
             className="w-full h-full object-cover object-center opacity-45 transform scale-105 transition-transform duration-1000"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#1F1D1D] via-black/40 to-black/60" />
@@ -42,16 +42,16 @@ export default async function HomePage() {
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-center space-y-6 pt-12">
           <div className="inline-flex items-center gap-2 bg-[#6B1724]/60 backdrop-blur-md px-4 py-1.5 rounded-full text-xs uppercase tracking-[0.25em] text-[#FAF8F5] border border-white/10">
             <Sparkles className="w-3.5 h-3.5 text-[#C2A26F]" />
-            <span>Autumn / Winter 2026 Collection</span>
+            <span>Dolmen Mall Lahore Boutique</span>
           </div>
 
           <h1 className="font-serif-luxury text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] text-[#FAF8F5]">
-            The Poetry of <br />
-            <span className="italic font-normal text-[#E8DFD5]">Pakistani Craftsmanship</span>
+            Handcrafted Jewellery, <br />
+            <span className="italic font-normal text-[#E8DFD5]">Accessories &amp; Bespoke Gifts</span>
           </h1>
 
           <p className="text-sm sm:text-base text-[#D4C5B3] max-w-xl mx-auto leading-relaxed font-light">
-            Artisanal pret, regal festive couture, and authentic Himalayan pashminas tailored for the discerning modern connoisseur.
+            Heirloom Polki chokers, hand-embroidered velvet potlis, and artisanal keepsake treasures crafted for celebrating life&apos;s most cherished milestones.
           </p>
 
           <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -59,7 +59,7 @@ export default async function HomePage() {
               href="/shop"
               className="w-full sm:w-auto bg-[#6B1724] hover:bg-[#80142B] text-white px-8 py-4 text-xs uppercase tracking-[0.2em] font-semibold transition-all shadow-lg hover:shadow-[#6B1724]/20 flex items-center justify-center gap-2"
             >
-              <span>Explore Collection</span>
+              <span>Explore Creations</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
@@ -79,28 +79,28 @@ export default async function HomePage() {
             <Award className="w-8 h-8 text-[#6B1724] shrink-0 stroke-[1.5]" />
             <div>
               <h4 className="text-xs font-bold uppercase tracking-wider text-[#1F1D1D]">Artisanal Atelier</h4>
-              <p className="text-[11px] text-[#7E7873]">Master hand-embellished craft</p>
+              <p className="text-[11px] text-[#7E7873]">Master jewellers &amp; artisans</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
             <Truck className="w-8 h-8 text-[#6B1724] shrink-0 stroke-[1.5]" />
             <div>
               <h4 className="text-xs font-bold uppercase tracking-wider text-[#1F1D1D]">Nationwide Dispatch</h4>
-              <p className="text-[11px] text-[#7E7873]">Free shipping on orders &gt; Rs. 10k</p>
+              <p className="text-[11px] text-[#7E7873]">Free shipping on orders &gt; Rs. 8k</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
             <MapPin className="w-8 h-8 text-[#6B1724] shrink-0 stroke-[1.5]" />
             <div>
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#1F1D1D]">Flagship Retail</h4>
-              <p className="text-[11px] text-[#7E7873]">Dolmen Mall, DHA Lahore</p>
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#1F1D1D]">Dolmen Mall Flagship</h4>
+              <p className="text-[11px] text-[#7E7873]">DHA Phase 6, Lahore</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
             <RefreshCw className="w-8 h-8 text-[#6B1724] shrink-0 stroke-[1.5]" />
             <div>
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#1F1D1D]">Hassle-Free Returns</h4>
-              <p className="text-[11px] text-[#7E7873]">7-day exchange guarantee</p>
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#1F1D1D]">Bespoke Packaging</h4>
+              <p className="text-[11px] text-[#7E7873]">Signature luxury gift boxes</p>
             </div>
           </div>
         </div>
@@ -111,7 +111,7 @@ export default async function HomePage() {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#E6DFD5] pb-4">
           <div>
             <span className="text-[11px] uppercase tracking-[0.25em] text-[#6B1724] font-semibold block mb-1">
-              Curated Wardrobe
+              Atelier Collections
             </span>
             <h2 className="font-serif-luxury text-2xl sm:text-4xl font-bold text-[#1F1D1D]">
               Explore by Category
@@ -191,28 +191,28 @@ export default async function HomePage() {
         <div className="relative rounded-xs overflow-hidden bg-[#2D1B20] text-[#FAF8F5] grid grid-cols-1 lg:grid-cols-2 border border-[#4D2932]">
           <div className="p-8 sm:p-14 flex flex-col justify-center space-y-5">
             <span className="text-xs uppercase tracking-[0.3em] text-[#C2A26F] font-semibold">
-              The Royal Heritage Atelier
+              The Heirloom Suite
             </span>
             <h2 className="font-serif-luxury text-3xl sm:text-5xl font-bold leading-tight">
-              Kashmiri Pashmina &amp; Hand-Zardozi Peshwas
+              Polki Jewellery, Velvet Potlis &amp; Inlay Keepsakes
             </h2>
             <p className="text-sm text-[#D4C5B3] leading-relaxed font-light">
-              Each piece takes up to 120 artisan hours. Pure hand-spun Himalayan cashmere and 80-gram raw silk adorned with antique dabka, kora, and semi-precious stone embellishments.
+              Crafted in collaboration with master silversmiths and Chinioti wood inlayers. Uncut Polki glass, genuine seed pearls, and rich micro-velvet adorned with antique dabka and tilla needlework.
             </p>
             <div className="pt-2">
               <Link
-                href="/shop?category=luxury-festive"
+                href="/shop?category=jewellery"
                 className="inline-flex items-center gap-2 bg-[#6B1724] hover:bg-[#80142B] text-white px-7 py-3.5 text-xs uppercase tracking-[0.2em] font-semibold transition-all shadow-md"
               >
-                <span>Explore Ceremonial Wear</span>
+                <span>Explore Jewellery &amp; Potlis</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           </div>
           <div className="relative min-h-[350px] lg:min-h-full">
             <img
-              src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&q=85&w=1200"
-              alt="Artisha Bridal & Pashmina Craft"
+              src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=85&w=1200"
+              alt="Artisha Heirloom Jewellery & Potlis"
               className="w-full h-full object-cover"
             />
           </div>
@@ -293,15 +293,15 @@ export default async function HomePage() {
                 rel="noopener noreferrer"
                 className="bg-[#25D366] hover:bg-[#1EBE5D] text-white px-6 py-3 text-xs uppercase tracking-widest font-semibold transition-colors flex items-center gap-1.5"
               >
-                <span>Book Bridal Appointment</span>
+                <span>WhatsApp Atelier Concierge</span>
               </a>
             </div>
           </div>
 
           <div className="lg:col-span-5 relative aspect-square overflow-hidden rounded-xs border border-[#E6DFD5]">
             <img
-              src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&q=80&w=1000"
-              alt="Artisha Flagship Store Lahore"
+              src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=1000"
+              alt="Artisha Flagship Jewellery Boutique Lahore"
               className="w-full h-full object-cover"
             />
           </div>
@@ -318,27 +318,27 @@ export default async function HomePage() {
             Curated on Instagram
           </h2>
           <p className="text-xs text-[#7E7873]">
-            Tag #ArtishaLahore to be featured on our digital gallery.
+            Tag #ArtishaLahore to be featured on our digital jewellery &amp; gifts gallery.
           </p>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
             {
-              url: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&q=80&w=600',
-              caption: 'Velvet tunics in deep crimson',
-            },
-            {
-              url: 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&q=80&w=600',
-              caption: 'Ivory Chanderi silk daylight reflections',
-            },
-            {
               url: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=600',
-              caption: 'Heirloom polki jewelry & bridal pearls',
+              caption: 'Royal Polki chokers & baroque pearl tassels',
             },
             {
-              url: 'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?auto=format&fit=crop&q=80&w=600',
-              caption: 'Pure pashmina hand-embroidery in progress',
+              url: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&q=80&w=600',
+              caption: 'Crimson micro-velvet zardozi potlis',
+            },
+            {
+              url: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=600',
+              caption: 'Handcrafted marble & lapis inlay vanity trays',
+            },
+            {
+              url: 'https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&q=80&w=600',
+              caption: 'Oudh & Damascena rose artisanal brass candles',
             },
           ].map((item, idx) => (
             <a

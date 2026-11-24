@@ -5,32 +5,32 @@ import { ArrowRight, Sparkles } from 'lucide-react';
 export default function CollectionsPage() {
   const collections = [
     {
-      title: 'Autumn / Winter 2026: The Velvet Atelier',
-      tagline: 'Signature Micro-Velvet & Antique Dabka',
-      description: 'Opulent deep crimson and jewel-toned ensembles embellished with traditional kora, dabka, and pearl borders. Designed for winter soirees and festive gatherings in Lahore.',
-      image: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&q=80&w=1200',
-      link: '/shop?category=pret-ready-to-wear',
-    },
-    {
-      title: 'Royal Lahore Festive & Bridal Edit',
-      tagline: 'Heirloom Kalidars & Zardozi Peshwas',
-      description: 'Handcrafted over months by senior master embroiderers using French knots, marori wire, and semi-precious emerald inlays on authentic 80-gram raw silk.',
-      image: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&q=80&w=1200',
-      link: '/shop?category=luxury-festive',
-    },
-    {
-      title: 'The Kashmir Pashmina & Kalamkari Stoles',
-      tagline: 'Pure Handwoven Himalayan Cashmere',
-      description: 'Featherlight pure cashmere wool blankets and stoles featuring needlework Aari embroidery and miniature Mughal courtyard motifs.',
-      image: 'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?auto=format&fit=crop&q=80&w=1200',
-      link: '/shop?category=artisanal-shawls',
-    },
-    {
-      title: 'Heirloom Polki & Filigree Jewelry',
-      tagline: '22K Gold Plated Heritage Ornaments',
-      description: 'Inspired by Lahore Museum antiquities and Mughal miniature portraiture. Kundan chokers, silver jhumkas, and freshwater pearls.',
+      title: 'The Royal Polki & Kundan Suite',
+      tagline: '22K Gold Plated Heirloom Ornaments',
+      description: 'Inspired by Lahore Museum antiquities and Mughal miniature portraiture. Handcrafted Polki chokers, Kundan chandbalis, emerald meenakari rings, and cultured freshwater pearls.',
       image: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=1200',
-      link: '/shop?category=bespoke-jewelry',
+      link: '/shop?category=jewellery',
+    },
+    {
+      title: 'Artisanal Velvet Potlis & Minaudières',
+      tagline: 'Hand-Embroidered Zardozi & Raw Silk',
+      description: 'Opulent crimson micro-velvet potli bags finished with baroque pearl tassels, alongside raw silk hard-case evening clutches featuring intricate floral tilla embroidery.',
+      image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&q=80&w=1200',
+      link: '/shop?category=accessories',
+    },
+    {
+      title: 'Handmade Keepsakes & Vanity Trays',
+      tagline: 'Chinioti Rosewood & Lapis Marble Inlay',
+      description: 'Hand-chiseled sheesham jewellery boxes lined in plush velvet, Makrana white marble trays inlaid with genuine Afghan lapis lazuli, and hand-poured Taif rose brass candles.',
+      image: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&q=80&w=1200',
+      link: '/shop?category=handmade-gifts',
+    },
+    {
+      title: 'The Imperial Celebration Hampers',
+      tagline: 'Curated Wedding & Festive Gift Crates',
+      description: 'The ultimate bespoke gifting experience. Embossed velvet hampers pairing handcrafted Kundan jewellery, artisanal potlis, and scented soy candles with personalized calligraphy cards.',
+      image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=1200',
+      link: '/shop?category=gift-hampers',
     },
   ];
 

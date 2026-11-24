@@ -4,9 +4,9 @@ const bcrypt = require('bcryptjs');
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log('Seeding Artisha database...');
+  console.log('Seeding Artisha database for Jewellery, Accessories & Handmade Gifts...');
 
-  // Clean existing data
+  // Clean existing data in referential integrity order
   await prisma.auditLog.deleteMany();
   await prisma.notification.deleteMany();
   await prisma.expense.deleteMany();
@@ -35,7 +35,7 @@ async function main() {
   // 1. Staff and Users
   const superAdmin = await prisma.user.create({
     data: {
-      name: 'Syeda Fatima (CEO & Founder)',
+      name: 'Syeda Fatima (CEO & Creative Director)',
       email: 'admin@artisha.pk',
       passwordHash: adminPass,
       role: 'SUPER_ADMIN',
@@ -45,7 +45,7 @@ async function main() {
 
   const manager = await prisma.user.create({
     data: {
-      name: 'Hamza Malik (Operations Manager)',
+      name: 'Hamza Malik (Boutique & Operations Manager)',
       email: 'manager@artisha.pk',
       passwordHash: managerPass,
       role: 'MANAGER',
@@ -55,7 +55,7 @@ async function main() {
 
   const inventoryManager = await prisma.user.create({
     data: {
-      name: 'Ayesha Tariq (Inventory Lead)',
+      name: 'Ayesha Tariq (Jewellery & Stock Lead)',
       email: 'inventory@artisha.pk',
       passwordHash: staffPass,
       role: 'INVENTORY_MANAGER',
@@ -65,7 +65,7 @@ async function main() {
 
   const orderManager = await prisma.user.create({
     data: {
-      name: 'Bilal Khan (Fulfillment & Dispatch)',
+      name: 'Bilal Khan (Gifting & Fulfillment Lead)',
       email: 'orders@artisha.pk',
       passwordHash: staffPass,
       role: 'ORDER_MANAGER',
@@ -146,11 +146,11 @@ async function main() {
         isActive: true,
       },
       {
-        code: 'FESTIVE15',
+        code: 'JEWEL15',
         discountType: 'PERCENTAGE',
         value: 15,
-        minSpend: 15000,
-        maxDiscount: 5000,
+        minSpend: 12000,
+        maxDiscount: 4000,
         usageLimit: 50,
         usedCount: 8,
         isActive: true,
@@ -158,712 +158,643 @@ async function main() {
     ],
   });
 
-  // 4. Categories
-  const catPret = await prisma.category.create({
+  // 4. Categories - Focused strictly on Jewellery, Accessories, and Handmade Gifts
+  const catJewellery = await prisma.category.create({
     data: {
-      name: 'Pret & Ready-to-Wear',
-      slug: 'pret-ready-to-wear',
-      description: 'Artisanal daily couture blending timeless heritage cuts with contemporary silhouettes.',
-      image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&q=80&w=1200',
+      name: 'Handcrafted Jewellery',
+      slug: 'jewellery',
+      description: 'Heirloom Polki chokers, Kundan chandbalis, 925 sterling silver filigree, and semi-precious stone adornments.',
+      image: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=1200',
       featured: true,
       displayOrder: 1,
     },
   });
 
-  const catFestive = await prisma.category.create({
+  const catAccessories = await prisma.category.create({
     data: {
-      name: 'Luxury Festive',
-      slug: 'luxury-festive',
-      description: 'Opulent ceremonial ensembles adorned with authentic hand-zardozi, tilla, and marori embroidery.',
-      image: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&q=80&w=1200',
+      name: 'Bespoke Accessories',
+      slug: 'accessories',
+      description: 'Embroidered velvet potlis, zardozi clutches, minaudières, hair jewellery, and silk scarves.',
+      image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=1200',
       featured: true,
       displayOrder: 2,
     },
   });
 
-  const catShawls = await prisma.category.create({
+  const catHandmadeGifts = await prisma.category.create({
     data: {
-      name: 'Artisanal Shawls & Stoles',
-      slug: 'artisanal-shawls',
-      description: 'Handwoven pure wool, pashmina, and silk stoles crafted by master weavers.',
-      image: 'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?auto=format&fit=crop&q=80&w=1200',
+      name: 'Handmade Gifts & Keepsakes',
+      slug: 'handmade-gifts',
+      description: 'Artisanal soy candles in antique brass, marble inlay vanity trays, and hand-carved sheesham keepsake boxes.',
+      image: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&q=80&w=1200',
       featured: true,
       displayOrder: 3,
     },
   });
 
-  const catAccessories = await prisma.category.create({
+  const catGiftHampers = await prisma.category.create({
     data: {
-      name: 'Handcrafted Accessories & Bags',
-      slug: 'handcrafted-accessories',
-      description: 'Embellished velvet potlis, raw silk clutches, and artisanal khussas.',
-      image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=1200',
+      name: 'Luxury Gift Hampers',
+      slug: 'gift-hampers',
+      description: 'Curated celebration and bridal gift boxes pairing handcrafted jewelry, artisanal potlis, and scented keepsakes.',
+      image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=1200',
       featured: true,
       displayOrder: 4,
     },
   });
 
-  const catJewelry = await prisma.category.create({
-    data: {
-      name: 'Bespoke Jewelry',
-      slug: 'bespoke-jewelry',
-      description: 'Semi-precious stone ornaments, silver filigree jhumkas, and royal polki heirlooms.',
-      image: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=1200',
-      featured: true,
-      displayOrder: 5,
-    },
-  });
-
-  const catHome = await prisma.category.create({
-    data: {
-      name: 'Home & Living Art',
-      slug: 'home-living-art',
-      description: 'Curated artisanal home accents, hand-block printed textiles, and carved brass wares.',
-      image: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&q=80&w=1200',
-      featured: false,
-      displayOrder: 6,
-    },
-  });
-
-  // 5. Products
+  // 5. Products (12 Luxury Pieces strictly in Jewellery, Accessories, and Handmade Gifts)
   const productsData = [
+    // --- JEWELLERY ---
     {
-      name: 'Crimson Velvet Embroidered Kurta Set',
-      slug: 'crimson-velvet-embroidered-kurta-set',
-      sku: 'ART-VEL-001',
-      description: 'Crafted in deep burgundy micro-velvet, this tunic features intricate antique dabka, nakshi, and marori embroidery along the neckline and cuffs. Paired with straight-cut raw silk trousers and a contrasting organza dupatta bordered in scallop lace.',
-      shortDescription: 'Deep crimson micro-velvet tunic with intricate gold dabka embroidery and organza dupatta.',
-      price: 24500,
-      salePrice: 21990,
-      costPrice: 11000,
-      stock: 18,
-      lowStockThreshold: 4,
-      isFeatured: true,
-      isBestseller: true,
-      isNewArrival: false,
-      categoryId: catPret.id,
-      images: JSON.stringify([
-        'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&q=80&w=1200',
-        'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&q=80&w=1200',
-        'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=1200',
-      ]),
-      material: 'Pure Micro Velvet with Silk Organza Dupatta',
-      careInstructions: 'Dry clean only. Store in a breathable cotton garment bag.',
-      seoTitle: 'Crimson Velvet Embroidered Kurta | Artisha Lahore',
-      seoDescription: 'Shop our signature crimson velvet luxury kurta set hand-embellished with heritage dabka and tilla embroidery at Artisha Dolmen Mall Lahore.',
-      variants: [
-        { sku: 'ART-VEL-001-S', name: 'Small / Crimson', size: 'Small', color: 'Crimson', stock: 6 },
-        { sku: 'ART-VEL-001-M', name: 'Medium / Crimson', size: 'Medium', color: 'Crimson', stock: 8 },
-        { sku: 'ART-VEL-001-L', name: 'Large / Crimson', size: 'Large', color: 'Crimson', stock: 4 },
-      ],
-    },
-    {
-      name: 'Ivory Hand-Block Chanderi Silk Angrakha',
-      slug: 'ivory-hand-block-chanderi-silk-angrakha',
-      sku: 'ART-CHN-002',
-      description: 'A poetic ode to old Lahore craftsmanship. Features a flowing flared Chanderi silk silhouette with custom hand-carved floral block prints in muted beige and antique gold. Accented with handmade fabric tassels and pearl drops.',
-      shortDescription: 'Flared Ivory Chanderi silk Angrakha with hand-blocked motifs and delicate pearl trims.',
-      price: 19800,
-      salePrice: null,
-      costPrice: 9200,
-      stock: 14,
-      lowStockThreshold: 3,
-      isFeatured: true,
-      isBestseller: false,
-      isNewArrival: true,
-      categoryId: catPret.id,
-      images: JSON.stringify([
-        'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&q=80&w=1200',
-        'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=1200',
-      ]),
-      material: '100% Chanderi Silk & Cotton Mulmul Lining',
-      careInstructions: 'Gentle dry clean recommended. Cool iron on reverse.',
-      seoTitle: 'Ivory Chanderi Silk Angrakha - Artisha Boutique',
-      seoDescription: 'Discover the artisanal ivory Angrakha kurta in pure Chanderi silk. Available online and at Artisha Dolmen Mall Lahore.',
-      variants: [
-        { sku: 'ART-CHN-002-S', name: 'Small / Ivory', size: 'Small', color: 'Ivory', stock: 5 },
-        { sku: 'ART-CHN-002-M', name: 'Medium / Ivory', size: 'Medium', color: 'Ivory', stock: 5 },
-        { sku: 'ART-CHN-002-L', name: 'Large / Ivory', size: 'Large', color: 'Ivory', stock: 4 },
-      ],
-    },
-    {
-      name: 'Emerald Heritage Zardozi Bridal Peshwas',
-      slug: 'emerald-heritage-zardozi-bridal-peshwas',
-      sku: 'ART-PESH-003',
-      description: 'A masterpiece from the Royal Artisha Atelier. Crafted on pure bottle green raw silk with 16 kalis, extensively hand-worked with French knots, gotta patti, kora, and semi-precious emerald bead inlays. Accompanied by a heavy mukesh net dupatta.',
-      shortDescription: 'Royal emerald raw silk peshwas heavily hand-crafted with antique zardozi, crystals, and mukesh.',
-      price: 78000,
-      salePrice: 69900,
-      costPrice: 38000,
-      stock: 4,
-      lowStockThreshold: 2,
-      isFeatured: true,
-      isBestseller: true,
-      isNewArrival: false,
-      categoryId: catFestive.id,
-      images: JSON.stringify([
-        'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&q=80&w=1200',
-        'https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&q=80&w=1200',
-      ]),
-      material: '80g Pure Raw Silk with Mukesh Net Dupatta',
-      careInstructions: 'Strictly dry clean. Preserve in acid-free tissue wrap.',
-      seoTitle: 'Emerald Green Zardozi Formal Peshwas | Artisha Lahore',
-      seoDescription: 'Exclusive bridal & luxury festive wear by Artisha. Traditional hand-embellished craftsmanship.',
-      variants: [
-        { sku: 'ART-PESH-003-CUSTOM', name: 'Custom Stitched / Emerald', size: 'Custom', color: 'Emerald Green', stock: 4 },
-      ],
-    },
-    {
-      name: 'Champagne Tissue Gold Kalidar Set',
-      slug: 'champagne-tissue-gold-kalidar-set',
-      sku: 'ART-TIS-004',
-      description: 'Shimmering metallic gold tissue fabric cut into a dramatic 24-kali flared silhouette. Embellished with delicate resham floral bouquets and badla wire embroidery. Paired with crushed silk Dhaka trousers.',
-      shortDescription: 'Shimmering champagne tissue kalidar with antique badla embroidery and crushed silk trousers.',
-      price: 52000,
-      salePrice: null,
-      costPrice: 26000,
-      stock: 8,
-      lowStockThreshold: 3,
-      isFeatured: true,
-      isBestseller: false,
-      isNewArrival: true,
-      categoryId: catFestive.id,
-      images: JSON.stringify([
-        'https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&q=80&w=1200',
-        'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&q=80&w=1200',
-      ]),
-      material: 'Gold Metallic Silk Tissue with Silk Lining',
-      careInstructions: 'Specialist dry clean only.',
-      seoTitle: 'Champagne Tissue Gold Kalidar | Artisha Couture',
-      seoDescription: 'Elegance redefined in molten gold tissue. Shop the new festive collection at Artisha.',
-      variants: [
-        { sku: 'ART-TIS-004-S', name: 'Small / Gold', size: 'Small', color: 'Champagne Gold', stock: 3 },
-        { sku: 'ART-TIS-004-M', name: 'Medium / Gold', size: 'Medium', color: 'Champagne Gold', stock: 3 },
-        { sku: 'ART-TIS-004-L', name: 'Large / Gold', size: 'Large', color: 'Champagne Gold', stock: 2 },
-      ],
-    },
-    {
-      name: 'Kashmiri Aari Embroidered Pure Pashmina Shawl',
-      slug: 'kashmiri-aari-embroidered-pure-pashmina-shawl',
-      sku: 'ART-SHWL-005',
-      description: 'Spun from authentic Himalayan cashmere and hand-embroidered by master artisans in Kashmir. Features intricate all-over floral jaal work utilizing fine silk needlework that takes over 4 months to complete.',
-      shortDescription: 'Heirloom 100% pure pashmina shawl with fine all-over hand needlework in antique burgundy tones.',
-      price: 48500,
-      salePrice: 42000,
-      costPrice: 24000,
-      stock: 6,
-      lowStockThreshold: 2,
-      isFeatured: true,
-      isBestseller: true,
-      isNewArrival: false,
-      categoryId: catShawls.id,
-      images: JSON.stringify([
-        'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?auto=format&fit=crop&q=80&w=1200',
-        'https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?auto=format&fit=crop&q=80&w=1200',
-      ]),
-      material: '100% Grade-A Himalayan Cashmere Wool',
-      careInstructions: 'Professional dry clean. Keep in cedar wood storage.',
-      seoTitle: 'Pure Pashmina Hand-Embroidered Shawl | Artisha Pakistan',
-      seoDescription: 'Authentic Kashmiri Pashmina hand-embroidered shawls. Timeless luxury at Artisha Lahore.',
-      variants: [
-        { sku: 'ART-SHWL-005-BURGUNDY', name: 'Standard / Deep Burgundy', size: 'Free Size', color: 'Burgundy', stock: 4 },
-        { sku: 'ART-SHWL-005-IVORY', name: 'Standard / Antique Ivory', size: 'Free Size', color: 'Antique Ivory', stock: 2 },
-      ],
-    },
-    {
-      name: 'Handwoven Kalamkari Silk Wool Doshala',
-      slug: 'handwoven-kalamkari-silk-wool-doshala',
-      sku: 'ART-SHWL-006',
-      description: 'Featuring freehand pen-drawn Kalamkari motifs depicting royal Mughal courtyards and flora, printed on a luxurious blend of merino wool and wild tussar silk. Finished with pure silk fringe borders.',
-      shortDescription: 'Merino wool and silk blend reversible doshala with classical Mughal miniature motifs.',
-      price: 28000,
-      salePrice: null,
-      costPrice: 14000,
-      stock: 12,
-      lowStockThreshold: 3,
-      isFeatured: false,
-      isBestseller: false,
-      isNewArrival: true,
-      categoryId: catShawls.id,
-      images: JSON.stringify([
-        'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=1200',
-      ]),
-      material: '60% Merino Wool, 40% Tussar Silk',
-      careInstructions: 'Dry clean only.',
-      seoTitle: 'Kalamkari Mughal Art Doshala Shawl - Artisha',
-      seoDescription: 'Heritage silk-wool doshala with authentic Mughal art motifs. Premium luxury shawls at Artisha.',
-      variants: [
-        { sku: 'ART-SHWL-006-ONE', name: 'Free Size / Ochre & Navy', size: 'Free Size', color: 'Ochre Navy', stock: 12 },
-      ],
-    },
-    {
-      name: 'Maroon Velvet Dabka Handcrafted Potli Bag',
-      slug: 'maroon-velvet-dabka-handcrafted-potli-bag',
-      sku: 'ART-BAG-007',
-      description: 'The quintessential wedding companion. Structured in lush micro-velvet with circular zardozi medallions, braided metallic drawstring cords, and ornate hanging pearl jhumkas.',
-      shortDescription: 'Micro-velvet evening potli bag with zardozi medallion embroidery and pearl tassels.',
-      price: 8500,
-      salePrice: 7200,
-      costPrice: 3500,
-      stock: 22,
-      lowStockThreshold: 5,
-      isFeatured: true,
-      isBestseller: true,
-      isNewArrival: false,
-      categoryId: catAccessories.id,
-      images: JSON.stringify([
-        'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=1200',
-        'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&q=80&w=1200',
-      ]),
-      material: 'Micro Velvet, Zari Embroidery, Cultured Pearl Accents',
-      careInstructions: 'Wipe gently with dry cloth. Store in dust bag.',
-      seoTitle: 'Embroidered Velvet Potli Bag | Artisha Accessories',
-      seoDescription: 'Handcrafted luxury festive potli bags in Lahore. Available at Artisha Dolmen Mall.',
-      variants: [
-        { sku: 'ART-BAG-007-MAROON', name: 'Standard / Deep Maroon', size: 'One Size', color: 'Deep Maroon', stock: 14 },
-        { sku: 'ART-BAG-007-EMERALD', name: 'Standard / Emerald', size: 'One Size', color: 'Emerald Green', stock: 8 },
-      ],
-    },
-    {
-      name: 'Artisanal Hand-Stitched Zari Leather Khussa',
-      slug: 'artisanal-hand-stitched-zari-leather-khussa',
-      sku: 'ART-KHS-008',
-      description: 'Crafted from soft vegetable-tanned genuine leather with padded footbeds for all-day comfort. Intricately adorned with hand-stitched real silver zari thread and dabka knot work.',
-      shortDescription: 'Soft genuine leather khussa with antique zari work and cushioned memory footbed.',
-      price: 6800,
-      salePrice: null,
-      costPrice: 2800,
-      stock: 25,
-      lowStockThreshold: 5,
-      isFeatured: false,
-      isBestseller: true,
-      isNewArrival: false,
-      categoryId: catAccessories.id,
-      images: JSON.stringify([
-        'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&q=80&w=1200',
-      ]),
-      material: '100% Genuine Leather & Hand-Spun Zari Thread',
-      careInstructions: 'Keep dry. Condition leather with natural beeswax balm.',
-      seoTitle: 'Handcrafted Traditional Khussa Shoes - Artisha',
-      seoDescription: 'Pure leather khussas hand-embroidered with tilla and zari. Shop Artisha footwear.',
-      variants: [
-        { sku: 'ART-KHS-008-37', name: 'Size 37 / Gold & Tan', size: '37', color: 'Gold Tan', stock: 8 },
-        { sku: 'ART-KHS-008-38', name: 'Size 38 / Gold & Tan', size: '38', color: 'Gold Tan', stock: 9 },
-        { sku: 'ART-KHS-008-39', name: 'Size 39 / Gold & Tan', size: '39', color: 'Gold Tan', stock: 8 },
-      ],
-    },
-    {
-      name: 'Royal Heritage Polki & Kundan Choker Set',
-      slug: 'royal-heritage-polki-and-kundan-choker-set',
-      sku: 'ART-JWL-009',
-      description: 'Inspired by the regal jewelry of Mughal empresses. Crafted with 22k gold micro-plated brass, hand-set faceted polki glass stones, and strung with natural freshwater pearls and ruby-red drops.',
-      shortDescription: '22k gold plated bridal kundan choker with matching jhumkas and freshwater pearl strings.',
-      price: 34000,
-      salePrice: 29500,
-      costPrice: 15000,
-      stock: 5,
-      lowStockThreshold: 2,
-      isFeatured: true,
-      isBestseller: true,
-      isNewArrival: false,
-      categoryId: catJewelry.id,
-      images: JSON.stringify([
-        'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=1200',
-        'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=1200',
-      ]),
-      material: '22K Gold Plated Brass, Polki Stones, Real Freshwater Pearls',
-      careInstructions: 'Avoid direct perfume and moisture contact. Store in velvet jewelry case.',
-      seoTitle: 'Polki Kundan Bridal Choker Set | Artisha Lahore',
-      seoDescription: 'Bespoke heirloom jewellery set with kundan choker, matching earrings and tikka.',
-      variants: [
-        { sku: 'ART-JWL-009-GOLD', name: 'Complete Set / Antique Gold', size: 'Standard', color: 'Antique Gold', stock: 5 },
-      ],
-    },
-    {
-      name: 'Handcrafted Silver Filigree Floral Jhumkas',
-      slug: 'handcrafted-silver-filigree-floral-jhumkas',
-      sku: 'ART-JWL-010',
-      description: 'Pure 925 sterling silver filigree jhumkas handcrafted in Taxila and Multan using ancestral wire-weaving techniques. Accented with tiny emerald stones and silver bell drops that chime softly.',
-      shortDescription: '925 sterling silver filigree wire jhumkas with emerald accents and delicate silver bells.',
-      price: 16500,
-      salePrice: null,
-      costPrice: 8000,
-      stock: 10,
-      lowStockThreshold: 3,
-      isFeatured: false,
-      isBestseller: false,
-      isNewArrival: true,
-      categoryId: catJewelry.id,
-      images: JSON.stringify([
-        'https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&q=80&w=1200',
-      ]),
-      material: '925 Sterling Silver with Semi-Precious Inlay',
-      careInstructions: 'Clean with silver polishing cloth. Keep in airtight zip bag.',
-      seoTitle: '925 Silver Filigree Traditional Jhumkas - Artisha',
-      seoDescription: 'Artisanal sterling silver traditional earrings with heritage filigree craftsmanship.',
-      variants: [
-        { sku: 'ART-JWL-010-SILVER', name: 'Pair / Oxidized Silver', size: 'Standard', color: 'Oxidized Silver', stock: 10 },
-      ],
-    },
-    {
-      name: 'Hand-Carved Walnut Wood Brass Inlay Keepsake Box',
-      slug: 'hand-carved-walnut-wood-brass-inlay-keepsake-box',
-      sku: 'ART-HOM-011',
-      description: 'Sculpted from seasoned Kashmiri walnut wood with intricate hand-cut floral brass wire inlays. Lined inside with rich crimson velvet. An enduring piece of Pakistani craft heritage for your dresser or study.',
-      shortDescription: 'Solid walnut wood jewelry box with delicate brass wire floral inlay and velvet interior.',
-      price: 12500,
-      salePrice: 10800,
-      costPrice: 5500,
-      stock: 15,
-      lowStockThreshold: 4,
-      isFeatured: false,
-      isBestseller: false,
-      isNewArrival: true,
-      categoryId: catHome.id,
-      images: JSON.stringify([
-        'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&q=80&w=1200',
-      ]),
-      material: 'Seasoned Kashmiri Walnut Wood & Pure Solid Brass',
-      careInstructions: 'Wipe with soft microfiber cloth. Nourish with walnut oil annually.',
-      seoTitle: 'Walnut Wood & Brass Inlay Box | Artisha Home Living',
-      seoDescription: 'Luxury handcrafted wooden keepsake and jewelry boxes by Artisha Lahore.',
-      variants: [
-        { sku: 'ART-HOM-011-BOX', name: 'Medium (8x6 in) / Natural Walnut', size: '8x6 inches', color: 'Natural Walnut', stock: 15 },
-      ],
-    },
-    {
-      name: 'Botanical Hand-Block Printed Cotton Sateen Bedspread',
-      slug: 'botanical-hand-block-printed-cotton-sateen-bedspread',
-      sku: 'ART-HOM-012',
-      description: 'Crafted from 400-thread-count long-staple cotton sateen, individually stamped using teakwood blocks carved with indigenous jasmine and pomegranate motifs in earthy terracotta and sage hues.',
-      shortDescription: 'King-size 400TC cotton sateen bedspread with hand-blocked botanical art and 2 pillow shams.',
+      name: 'Royal Polki & Pearl Choker Set with Jhumkas',
+      slug: 'royal-polki-pearl-choker-set',
+      sku: 'ART-JWL-001',
+      description: 'A regal statement choker handcrafted with uncut polki stones set in 22k antique gold plating, accented by natural baroque freshwater pearl drops and rich emerald green meenakari on the reverse. Includes a matching pair of cascading polki jhumkas and adjustable silk dori string.',
+      shortDescription: 'Regal polki choker with freshwater pearl droplets and matching cascading jhumkas.',
       price: 18500,
-      salePrice: null,
+      salePrice: 16990,
       costPrice: 8500,
       stock: 12,
       lowStockThreshold: 3,
+      categoryId: catJewellery.id,
+      images: [
+        'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=1200',
+        'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=1200',
+        'https://images.unsplash.com/photo-1611591475878-8f83038a8e31?auto=format&fit=crop&q=80&w=1200',
+      ],
+      isFeatured: true,
+      isBestseller: true,
+      isNewArrival: false,
+      material: '22K Gold Plated Brass, Uncut Polki, Cultured Pearls, Meenakari Enamel',
+      careInstructions: 'Avoid direct contact with perfumes, moisture, and alcohol sprays. Store in airtight luxury suede pouch provided.',
+      seoTitle: 'Royal Polki & Pearl Choker Set | Artisha Lahore',
+      seoDescription: 'Handcrafted Polki choker set with baroque pearl droplets and matching jhumkas at Artisha Dolmen Mall Lahore.',
+      variants: [
+        { name: 'Emerald Green Drops', sku: 'ART-JWL-001-EM', price: 18500, stock: 6, color: 'Emerald Green', material: '22K Gold Plated' },
+        { name: 'Ruby Red Drops', sku: 'ART-JWL-001-RB', price: 18500, stock: 6, color: 'Ruby Red', material: '22K Gold Plated' },
+      ],
+    },
+    {
+      name: 'Antique Gold-Plated Kundan Chandbali Earrings',
+      slug: 'antique-kundan-chandbali-earrings',
+      sku: 'ART-JWL-002',
+      description: 'Classic crescent chandbalis crafted with glass Kundan stones, delicate seed pearl fringe, and fine micro-filigree detailing. Lightweight yet opulent, designed for festive celebrations and wedding soirées.',
+      shortDescription: 'Classic crescent Kundan chandbalis with seed pearl fringe and antique gold finish.',
+      price: 9800,
+      salePrice: null,
+      costPrice: 4200,
+      stock: 18,
+      lowStockThreshold: 4,
+      categoryId: catJewellery.id,
+      images: [
+        'https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&q=80&w=1200',
+        'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=1200',
+      ],
+      isFeatured: true,
+      isBestseller: true,
+      isNewArrival: false,
+      material: 'Gold Plated Brass, Kundan Stones, Seed Pearls',
+      careInstructions: 'Wipe with soft lint-free cloth after each wear. Keep dry.',
+      seoTitle: 'Antique Kundan Chandbali Earrings | Artisha Lahore',
+      seoDescription: 'Handcrafted Kundan chandbalis with delicate seed pearl fringe. Available at Artisha Lahore boutique.',
+      variants: [
+        { name: 'Standard Pair', sku: 'ART-JWL-002-STD', price: 9800, stock: 18, color: 'Antique Gold', material: 'Kundan & Pearls' },
+      ],
+    },
+    {
+      name: 'Handcrafted 925 Sterling Silver Filigree Cuff Bracelet',
+      slug: 'sterling-silver-filigree-cuff',
+      sku: 'ART-JWL-003',
+      description: 'Handcrafted in genuine 925 sterling silver by multigenerational silversmiths, this cuff exhibits the time-honored art of fine wire filigree. Features an adjustable open silhouette with oxidised antique patina highlights.',
+      shortDescription: 'Handcrafted 925 sterling silver cuff with intricate floral wire filigree and antique patina.',
+      price: 14200,
+      salePrice: 12900,
+      costPrice: 6500,
+      stock: 10,
+      lowStockThreshold: 2,
+      categoryId: catJewellery.id,
+      images: [
+        'https://images.unsplash.com/photo-1611591475878-8f83038a8e31?auto=format&fit=crop&q=80&w=1200',
+        'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=1200',
+      ],
       isFeatured: false,
       isBestseller: false,
-      isNewArrival: false,
-      categoryId: catHome.id,
-      images: JSON.stringify([
-        'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&q=80&w=1200',
-      ]),
-      material: '400 Thread Count Pure Cotton Sateen',
-      careInstructions: 'Machine wash delicate cycle in cold water. Tumble dry low.',
-      seoTitle: 'Hand-Block Printed Luxury Bedspread - Artisha',
-      seoDescription: 'Premium cotton sateen artisanal bedspreads and home textiles at Artisha.',
+      isNewArrival: true,
+      material: 'Solid 925 Sterling Silver (Hallmarked)',
+      careInstructions: 'Store in airtight pouch to prevent natural oxidation. Polish gently with a silver polishing cloth.',
+      seoTitle: '925 Sterling Silver Filigree Cuff | Artisha Jewellery',
+      seoDescription: 'Authentic 925 sterling silver filigree cuff handcrafted in Pakistan. Visit Artisha at Dolmen Mall Lahore.',
       variants: [
-        { sku: 'ART-HOM-012-KING', name: 'King Size / Terracotta Sage', size: 'King', color: 'Terracotta Sage', stock: 12 },
+        { name: 'Adjustable Medium (6.5 - 7.5 inch)', sku: 'ART-JWL-003-M', price: 14200, stock: 10, size: 'Medium Adjustable', color: 'Oxidized Silver' },
+      ],
+    },
+    {
+      name: 'Emerald Green Meenakari & Pearl Statement Ring',
+      slug: 'emerald-meenakari-pearl-statement-ring',
+      sku: 'ART-JWL-004',
+      description: 'An oversized royal cocktail ring featuring a deep emerald green glass stone framed with delicate Kundan petals and cultured pearl clusters. The shank is fully adjustable and adorned with traditional blue and ivory meenakari enamel.',
+      shortDescription: 'Oversized royal cocktail ring with Kundan petals, pearl clusters, and meenakari enamel.',
+      price: 6400,
+      salePrice: null,
+      costPrice: 2800,
+      stock: 15,
+      lowStockThreshold: 3,
+      categoryId: catJewellery.id,
+      images: [
+        'https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&q=80&w=1200',
+        'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=1200',
+      ],
+      isFeatured: true,
+      isBestseller: false,
+      isNewArrival: true,
+      material: '22K Gold Plated Alloy, Meenakari Enamel, Faux Emerald, Pearls',
+      careInstructions: 'Protect from liquid immersion and moisture.',
+      seoTitle: 'Emerald Meenakari Statement Ring | Artisha Jewellery',
+      seoDescription: 'Oversized royal cocktail ring with Kundan petals and meenakari artwork at Artisha Lahore.',
+      variants: [
+        { name: 'Free Size Adjustable', sku: 'ART-JWL-004-FS', price: 6400, stock: 15, size: 'Adjustable', color: 'Emerald Green' },
+      ],
+    },
+    {
+      name: 'Traditional Zircon & Ruby Bridal Matha Patti',
+      slug: 'traditional-zircon-ruby-bridal-matha-patti',
+      sku: 'ART-JWL-005',
+      description: 'A majestic headpiece fit for a regal bride. Hand-set with sparkling cubic zirconia, rich ruby-tinted stones, and delicate pearl stringing that rests effortlessly along the hairline.',
+      shortDescription: 'Majestic bridal headpiece with cubic zirconia, ruby crystals, and seed pearl borders.',
+      price: 12900,
+      salePrice: null,
+      costPrice: 5600,
+      stock: 7,
+      lowStockThreshold: 2,
+      categoryId: catJewellery.id,
+      images: [
+        'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=1200',
+        'https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&q=80&w=1200',
+      ],
+      isFeatured: false,
+      isBestseller: true,
+      isNewArrival: false,
+      material: 'Antique Gold Finish, Cubic Zirconia, Crystal Rubies, Seed Pearls',
+      careInstructions: 'Store flat in padded box.',
+      seoTitle: 'Zircon & Ruby Bridal Matha Patti | Artisha Lahore',
+      seoDescription: 'Handcrafted bridal matha patti headpiece with ruby crystals and seed pearls.',
+      variants: [
+        { name: 'Standard Single Headband', sku: 'ART-JWL-005-STD', price: 12900, stock: 7, color: 'Ruby & Antique Gold', material: 'Brass & Pearls' },
+      ],
+    },
+
+    // --- ACCESSORIES ---
+    {
+      name: 'Embroidered Crimson Micro-Velvet Potli Bag with Pearl Tassels',
+      slug: 'crimson-velvet-embroidered-potli-bag',
+      sku: 'ART-ACC-001',
+      description: 'Crafted in plush micro-velvet dyed in Artisha signature deep burgundy crimson. Decorated with antique zardozi dabka hand embroidery, golden tilla work, and finished with heavy clusters of baroque pearl tassels and braided drawstring cords.',
+      shortDescription: 'Plush crimson micro-velvet potli with handcrafted zardozi embroidery and pearl tassels.',
+      price: 7500,
+      salePrice: 6800,
+      costPrice: 3100,
+      stock: 22,
+      lowStockThreshold: 5,
+      categoryId: catAccessories.id,
+      images: [
+        'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&q=80&w=1200',
+        'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=1200',
+      ],
+      isFeatured: true,
+      isBestseller: true,
+      isNewArrival: false,
+      material: 'Silk Micro-Velvet, Gold Zardozi Dabka, Pearl Drops, Satin Lining',
+      careInstructions: 'Spot clean only. Store with silica gel pack.',
+      seoTitle: 'Crimson Velvet Zardozi Potli Bag | Artisha Accessories',
+      seoDescription: 'Hand-embroidered burgundy velvet potli bag with pearl tassels at Artisha Dolmen Mall Lahore.',
+      variants: [
+        { name: 'Burgundy Crimson', sku: 'ART-ACC-001-BUR', price: 7500, stock: 12, color: 'Burgundy Crimson', material: 'Micro-Velvet' },
+        { name: 'Emerald Green', sku: 'ART-ACC-001-EMG', price: 7500, stock: 10, color: 'Emerald Green', material: 'Micro-Velvet' },
+      ],
+    },
+    {
+      name: 'Hand-Zardozi Raw Silk Evening Clutch with Antique Clasp',
+      slug: 'hand-zardozi-raw-silk-evening-clutch',
+      sku: 'ART-ACC-002',
+      description: 'An elegant hard-case minaudière clutch wrapped in pure raw silk. Hand-embroidered with floral marori motifs, sequins, and metallic tilla. Features an antique brass push clasp embedded with a faceted onyx stone and detachable brass chain strap.',
+      shortDescription: 'Raw silk hard-case clutch with floral marori embroidery, onyx clasp, and detachable chain.',
+      price: 11200,
+      salePrice: 9990,
+      costPrice: 4800,
+      stock: 14,
+      lowStockThreshold: 3,
+      categoryId: catAccessories.id,
+      images: [
+        'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=1200',
+        'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&q=80&w=1200',
+      ],
+      isFeatured: true,
+      isBestseller: false,
+      isNewArrival: true,
+      material: 'Pure Raw Silk, Metal Hard Case, Hand Zardozi, Brass Chain',
+      careInstructions: 'Avoid liquid spills. Keep in velvet dustbag.',
+      seoTitle: 'Hand-Zardozi Raw Silk Evening Clutch | Artisha',
+      seoDescription: 'Artisanal silk minaudière clutch with hand embroidery and antique brass chain.',
+      variants: [
+        { name: 'Ivory Gold', sku: 'ART-ACC-002-IVR', price: 11200, stock: 8, color: 'Ivory Gold', material: 'Raw Silk' },
+        { name: 'Midnight Black', sku: 'ART-ACC-002-BLK', price: 11200, stock: 6, color: 'Midnight Black', material: 'Raw Silk' },
+      ],
+    },
+    {
+      name: 'Artisanal Gota & Pearl Floral Hair Barrette Set',
+      slug: 'artisanal-gota-pearl-hair-barrettes',
+      sku: 'ART-ACC-003',
+      description: 'A charming set of two artisanal hair pins sculpted with gold gota patti rosettes, freshwater pearl vines, and brass leaf filigree. Perfect for styling festive braids, chignons, and wedding guest updos.',
+      shortDescription: 'Pair of handcrafted hair pins with gold gota rosettes and freshwater pearl vines.',
+      price: 4200,
+      salePrice: null,
+      costPrice: 1600,
+      stock: 25,
+      lowStockThreshold: 5,
+      categoryId: catAccessories.id,
+      images: [
+        'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=1200',
+        'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=1200',
+      ],
+      isFeatured: false,
+      isBestseller: true,
+      isNewArrival: false,
+      material: 'Gold Gota Patti, Freshwater Pearls, Brass Clips',
+      careInstructions: 'Gently wipe with dry cloth. Store in box.',
+      seoTitle: 'Artisanal Gota & Pearl Hair Barrettes | Artisha',
+      seoDescription: 'Handcrafted floral hair barrettes for festive styling at Artisha Dolmen Mall Lahore.',
+      variants: [
+        { name: 'Set of 2 Pins', sku: 'ART-ACC-003-PAIR', price: 4200, stock: 25, color: 'Antique Gold', material: 'Gota & Pearls' },
+      ],
+    },
+
+    // --- HANDMADE GIFTS & KEEPSAKES ---
+    {
+      name: 'Hand-Carved Sheesham Wood Velvet-Lined Keepsake Box',
+      slug: 'hand-carved-sheesham-keepsake-box',
+      sku: 'ART-GFT-001',
+      description: 'Hand-chiseled from sustainably harvested sheesham rosewood by master artisans in Chiniot, Pakistan. Features intricate lattice jali fretwork on the lid, brass corner brackets, and a plush midnight navy velvet interior with ring slots and keepsake compartments.',
+      shortDescription: 'Chinioti hand-carved sheesham rosewood jewellery box with brass accents and velvet interior.',
+      price: 8900,
+      salePrice: 7990,
+      costPrice: 3800,
+      stock: 16,
+      lowStockThreshold: 4,
+      categoryId: catHandmadeGifts.id,
+      images: [
+        'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&q=80&w=1200',
+        'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=1200',
+      ],
+      isFeatured: true,
+      isBestseller: true,
+      isNewArrival: false,
+      material: 'Solid Sheesham Rosewood, Solid Brass Hardware, Velvet Lining',
+      careInstructions: 'Clean with natural beeswax wood polish. Do not expose to direct prolonged sunlight.',
+      seoTitle: 'Hand-Carved Sheesham Keepsake Jewellery Box | Artisha',
+      seoDescription: 'Authentic Chinioti hand-carved sheesham keepsake box with brass accents at Artisha Lahore.',
+      variants: [
+        { name: 'Medium (8x6x4 inches)', sku: 'ART-GFT-001-M', price: 8900, stock: 16, size: '8x6x4 in', color: 'Natural Rosewood', material: 'Sheesham Wood' },
+      ],
+    },
+    {
+      name: 'Lapis Lazuli & Brass Inlay Marble Vanity Tray',
+      slug: 'lapis-lazuli-brass-marble-vanity-tray',
+      sku: 'ART-GFT-002',
+      description: 'An heirloom decorative tray carved from solid Makrana white marble. Features hand-cut genuine Afghan lapis lazuli stone floral inlay paired with pure brass wire detailing. Designed as an opulent dresser vanity tray for perfumes, rings, and watches.',
+      shortDescription: 'Solid white marble vanity tray with handcrafted lapis lazuli floral inlay and brass borders.',
+      price: 13500,
+      salePrice: null,
+      costPrice: 6200,
+      stock: 8,
+      lowStockThreshold: 2,
+      categoryId: catHandmadeGifts.id,
+      images: [
+        'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=1200',
+        'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&q=80&w=1200',
+      ],
+      isFeatured: true,
+      isBestseller: false,
+      isNewArrival: true,
+      material: 'Natural White Marble, Semi-Precious Lapis Lazuli, Pure Brass Wire',
+      careInstructions: 'Wipe with damp cloth. Avoid harsh acidic cleaners.',
+      seoTitle: 'Lapis Lazuli & Brass Marble Vanity Tray | Artisha Gifts',
+      seoDescription: 'Solid white marble tray with genuine lapis lazuli stone inlay at Artisha Dolmen Mall Lahore.',
+      variants: [
+        { name: 'Oblong 10x6 inch', sku: 'ART-GFT-002-10', price: 13500, stock: 8, size: '10x6 in', color: 'White & Cobalt Blue', material: 'Marble & Lapis' },
+      ],
+    },
+    {
+      name: 'Oudh & Rose Damascena Artisanal Soy Candle in Hammered Brass Vessel',
+      slug: 'oudh-rose-damascena-brass-candle',
+      sku: 'ART-GFT-003',
+      description: 'Hand-poured 100% natural soy wax candle scented with precious botanical oils of pure Taif Rose Damascena, smoky Cambodian Oudh, and amber wood. Poured into a hand-hammered antique brass vessel made by traditional copper artisans in Lahore Old City. 55 hours burn time.',
+      shortDescription: 'Hand-poured soy candle with Taif rose and smoky oudh in an artisan hammered brass vessel.',
+      price: 5200,
+      salePrice: null,
+      costPrice: 2100,
+      stock: 30,
+      lowStockThreshold: 6,
+      categoryId: catHandmadeGifts.id,
+      images: [
+        'https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&q=80&w=1200',
+        'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&q=80&w=1200',
+      ],
+      isFeatured: false,
+      isBestseller: true,
+      isNewArrival: true,
+      material: '100% Soy Wax, Cotton Wick, Pure Fragrance Oils, Hand-Hammered Brass Jar',
+      careInstructions: 'Trim wick to 1/4 inch before each lighting. Never leave burning candle unattended.',
+      seoTitle: 'Oudh & Rose Damascena Hammered Brass Candle | Artisha Gifts',
+      seoDescription: 'Artisanal hand-poured soy candle in an authentic hammered brass jar. Available at Artisha Lahore.',
+      variants: [
+        { name: '300g Brass Jar (55h burn)', sku: 'ART-GFT-003-300', price: 5200, stock: 30, size: '300g', color: 'Hammered Brass', material: 'Soy Wax & Brass' },
+      ],
+    },
+
+    // --- LUXURY GIFT HAMPERS ---
+    {
+      name: 'The Imperial Celebration Hamper (Jewellery, Potli & Scented Keepsake)',
+      slug: 'imperial-celebration-gift-hamper',
+      sku: 'ART-HMP-001',
+      description: 'The definitive luxury gift box for celebratory milestones. Presented in an embossed velvet keepsake crate tied with silk ribbon. Includes: 1 pair of Kundan Chandbali Earrings, 1 Hand-Embroidered Velvet Potli Bag, 1 Oudh & Rose Hand-Hammered Brass Candle, and an artisan greeting card with personalized calligraphy.',
+      shortDescription: 'Curated luxury velvet hamper crate with Kundan earrings, velvet potli, and hammered brass candle.',
+      price: 26000,
+      salePrice: 23500,
+      costPrice: 11000,
+      stock: 9,
+      lowStockThreshold: 2,
+      categoryId: catGiftHampers.id,
+      images: [
+        'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=1200',
+        'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&q=80&w=1200',
+        'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=1200',
+      ],
+      isFeatured: true,
+      isBestseller: true,
+      isNewArrival: false,
+      material: 'Velvet Box, Kundan Brass Jewelry, Micro-Velvet Potli, Soy Wax Candle',
+      careInstructions: 'Keep in cool dry location. Personalized card written upon order.',
+      seoTitle: 'The Imperial Celebration Hamper | Artisha Luxury Gifts',
+      seoDescription: 'Bespoke gift hamper pairing jewellery, hand-embroidered potli, and hammered brass candle at Artisha Lahore.',
+      variants: [
+        { name: 'Burgundy Imperial Crate', sku: 'ART-HMP-001-BUR', price: 26000, stock: 9, color: 'Burgundy & Gold', material: 'Velvet Hamper Box' },
       ],
     },
   ];
 
-  for (const item of productsData) {
-    const { variants, ...prod } = item;
-    const createdProduct = await prisma.product.create({
+  // Insert products with variants and stock movements
+  const createdProducts = [];
+  for (const p of productsData) {
+    const { variants, ...prodData } = p;
+    const product = await prisma.product.create({
       data: {
-        ...prod,
+        ...prodData,
+        images: JSON.stringify(prodData.images),
         variants: {
-          create: variants,
+          create: variants.map((v) => ({
+            name: v.name,
+            sku: v.sku,
+            price: v.price,
+            stock: v.stock,
+            size: v.size || null,
+            color: v.color || null,
+            material: v.material || null,
+          })),
         },
       },
+      include: { variants: true },
     });
 
     // Record initial stock movement
     await prisma.stockMovement.create({
       data: {
-        productId: createdProduct.id,
+        productId: product.id,
+        quantity: product.stock,
         type: 'RESTOCK',
-        quantity: createdProduct.stock,
-        reason: 'Initial boutique atelier stock intake',
-        referenceNote: `Batch ART-2026-Q1`,
+        reason: 'Initial inventory intake for boutique opening & online storefront.',
+        referenceNote: 'INITIAL_STOCK_IN',
         userId: superAdmin.id,
       },
     });
+
+    createdProducts.push(product);
   }
 
-  // 6. Reviews
-  const allProds = await prisma.product.findMany();
-  const sampleReviews = [
-    {
-      productIndex: 0,
-      authorName: 'Aamna Sohail (DHA Lahore)',
-      rating: 5,
-      comment: 'The crimson velvet kurta exceeded all expectations! The dabka embroidery has remarkable depth and precision. I wore it for a family dholki and received endless compliments.',
-      isVerifiedPurchase: true,
-    },
-    {
-      productIndex: 0,
-      authorName: 'Mahnoor Tariq',
-      rating: 5,
-      comment: 'Super fast delivery in Lahore (arrived next day!). The packaging in velvet garment bags feels ultra luxurious. Truly a boutique experience.',
-      isVerifiedPurchase: true,
-    },
-    {
-      productIndex: 2,
-      authorName: 'Dr. Sarah Farooq (Islamabad)',
-      rating: 5,
-      comment: 'The bridal peshwas is a true heirloom piece. The craftsmanship is identical to high-end bridal couture at three times the price. Stunning!',
-      isVerifiedPurchase: true,
-    },
-    {
-      productIndex: 4,
-      authorName: 'Nida Khawaja (Karachi)',
-      rating: 5,
-      comment: 'Genuine cashmere pashmina with breathtaking needlework. Incredibly soft, featherlight yet wonderfully warm. Highly recommended.',
-      isVerifiedPurchase: true,
-    },
-    {
-      productIndex: 6,
-      authorName: 'Hira Usman',
-      rating: 5,
-      comment: 'The maroon potli bag is even prettier in person! Sturdy structure and lovely pearls.',
-      isVerifiedPurchase: true,
-    },
-  ];
+  // 6. Verified Reviews
+  await prisma.review.createMany({
+    data: [
+      {
+        productId: createdProducts[0].id, // Royal Polki Choker
+        authorName: 'Mahnoor Tariq',
+        rating: 5,
+        comment: 'Breathtaking craftsmanship and heirloom quality. I purchased this choker set for my sister’s wedding at Dolmen Mall Lahore. The polki work is exquisite and the emerald meenakari on the reverse is such an authentic heirloom touch. Exceeded all expectations!',
+        isVerifiedPurchase: true,
+        status: 'APPROVED',
+      },
+      {
+        productId: createdProducts[5].id, // Crimson Velvet Potli
+        authorName: 'Ayesha Raza',
+        rating: 5,
+        comment: 'The velvet and zardozi work are unmatched. The burgundy micro-velvet is so rich and the pearl tassels give it the most luxurious drape. Carried it to a reception and received endless compliments.',
+        isVerifiedPurchase: true,
+        status: 'APPROVED',
+      },
+      {
+        productId: createdProducts[8].id, // Sheesham Keepsake Box
+        authorName: 'Farhan Siddiqui',
+        rating: 5,
+        comment: 'A true work of artisanal art. Bought this as an anniversary gift. The hand-carved jali fretwork on the rosewood and the velvet lining are impeccable. Proud of Pakistani artisan talent!',
+        isVerifiedPurchase: true,
+        status: 'APPROVED',
+      },
+    ],
+  });
 
-  for (const rev of sampleReviews) {
-    if (allProds[rev.productIndex]) {
-      await prisma.review.create({
-        data: {
-          productId: allProds[rev.productIndex].id,
-          authorName: rev.authorName,
-          rating: rev.rating,
-          comment: rev.comment,
-          isVerifiedPurchase: rev.isVerifiedPurchase,
-          status: 'APPROVED',
-        },
-      });
-    }
-  }
-
-  // 7. Orders & Payments
+  // 7. Seed Orders
   const order1 = await prisma.order.create({
     data: {
-      orderNumber: 'ART-10021',
+      orderNumber: 'ART-2026-1001',
       userId: customerUser.id,
       shippingAddress: 'House 42, Sector Y, Phase 3, DHA, Lahore',
       city: 'Lahore',
       postalCode: '54792',
       shippingMethod: 'STANDARD',
-      shippingCost: 150,
+      shippingCost: 0,
       paymentMethod: 'COD',
       paymentStatus: 'VERIFIED',
       orderStatus: 'DELIVERED',
-      subtotal: 24500,
-      discountAmount: 2450,
+      subtotal: 18500,
+      discountAmount: 1850,
       couponCode: 'ARTISHA10',
-      totalAmount: 22200,
-      trackingNumber: 'TCS-98320194',
+      totalAmount: 16650,
+      trackingNumber: 'TCS-LHE-9821447',
       courierName: 'TCS Express',
-      customerNotes: 'Please ring the bell upon arrival.',
-      internalNotes: 'Delivered smoothly by TCS on 18 Nov.',
+      customerNotes: 'Customer requested complimentary luxury gift wrapping.',
+      internalNotes: 'Delivered smoothly by TCS Lahore hub.',
       items: {
         create: [
           {
-            productId: allProds[0].id,
-            name: allProds[0].name,
-            sku: allProds[0].sku,
-            price: 24500,
+            productId: createdProducts[0].id,
+            name: createdProducts[0].name,
+            sku: createdProducts[0].sku,
+            price: 18500,
             quantity: 1,
-            subtotal: 24500,
-            imageUrl: JSON.parse(allProds[0].images)[0],
+            subtotal: 18500,
+            imageUrl: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=1200',
           },
         ],
-      },
-      payments: {
-        create: {
-          amount: 22200,
-          paymentMethod: 'COD',
-          status: 'VERIFIED',
-          transactionRef: 'COD-LHR-9832',
-          notes: 'Cash collected by TCS rider and remitted.',
-          verifiedAt: new Date(),
-        },
       },
     },
   });
 
   const order2 = await prisma.order.create({
     data: {
-      orderNumber: 'ART-10022',
-      guestName: 'Mariam Jahangir',
-      guestEmail: 'mariam.j@gmail.com',
-      guestPhone: '+92 321 8844221',
-      shippingAddress: 'Apartment 4B, Creek Vistas, Phase 8, DHA, Karachi',
+      orderNumber: 'ART-2026-1002',
+      guestName: 'Sana Farooq',
+      guestEmail: 'sana.farooq@gmail.com',
+      guestPhone: '+92 321 8877665',
+      shippingAddress: 'Apartment 4B, Clifton Block 5, Karachi',
       city: 'Karachi',
-      postalCode: '75500',
+      postalCode: '75600',
       shippingMethod: 'STANDARD',
       shippingCost: 250,
       paymentMethod: 'BANK_TRANSFER',
       paymentStatus: 'VERIFIED',
-      orderStatus: 'SHIPPED',
-      subtotal: 48500,
-      discountAmount: 1000,
-      couponCode: 'WELCOME1000',
-      totalAmount: 47750,
-      trackingNumber: 'LEO-78491023',
+      orderStatus: 'PROCESSING',
+      subtotal: 12700,
+      discountAmount: 0,
+      totalAmount: 12950,
+      trackingNumber: 'LEO-KHI-4478129',
       courierName: 'Leopards Courier',
-      customerNotes: 'Deliver between 10am to 5pm.',
-      internalNotes: 'Bank receipt verified with Meezan Bank Ltd account.',
+      customerNotes: 'Deliver between 2pm to 6pm.',
+      internalNotes: 'Bank transfer confirmed via Meezan Bank IBFT.',
       items: {
         create: [
           {
-            productId: allProds[4].id,
-            name: allProds[4].name,
-            sku: allProds[4].sku,
-            price: 48500,
+            productId: createdProducts[5].id, // Velvet potli
+            name: createdProducts[5].name,
+            sku: createdProducts[5].sku,
+            price: 7500,
             quantity: 1,
-            subtotal: 48500,
-            imageUrl: JSON.parse(allProds[4].images)[0],
+            subtotal: 7500,
+            imageUrl: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&q=80&w=1200',
+          },
+          {
+            productId: createdProducts[10].id, // Brass Candle
+            name: createdProducts[10].name,
+            sku: createdProducts[10].sku,
+            price: 5200,
+            quantity: 1,
+            subtotal: 5200,
+            imageUrl: 'https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&q=80&w=1200',
           },
         ],
-      },
-      payments: {
-        create: {
-          amount: 47750,
-          paymentMethod: 'BANK_TRANSFER',
-          status: 'VERIFIED',
-          transactionRef: 'MEZN-TRX-839210',
-          bankAccount: 'Meezan Bank - Artisha Private Limited',
-          notes: 'Customer transferred via mobile app. Receipt matched.',
-          verifiedAt: new Date(),
-        },
       },
     },
   });
 
   const order3 = await prisma.order.create({
     data: {
-      orderNumber: 'ART-10023',
-      guestName: 'Alizeh Chaudhry',
-      guestEmail: 'alizeh.c@hotmail.com',
-      guestPhone: '+92 333 4455889',
-      shippingAddress: 'Street 12, F-7/2, Islamabad',
+      orderNumber: 'ART-2026-1003',
+      guestName: 'Hira Naveed',
+      guestEmail: 'hira.naveed@hotmail.com',
+      guestPhone: '+92 332 4433221',
+      shippingAddress: 'House 18, Street 7, F-7/2, Islamabad',
       city: 'Islamabad',
       postalCode: '44000',
       shippingMethod: 'STANDARD',
-      shippingCost: 250,
+      shippingCost: 0,
       paymentMethod: 'COD',
       paymentStatus: 'PENDING',
-      orderStatus: 'PROCESSING',
-      subtotal: 28300,
-      discountAmount: 0,
-      couponCode: null,
-      totalAmount: 28550,
-      customerNotes: 'Gift wrapping requested please.',
-      internalNotes: 'Order confirmed with customer via call. Packing in boutique luxury gift box.',
+      orderStatus: 'PENDING',
+      subtotal: 26000,
+      discountAmount: 2500,
+      couponCode: 'WELCOME1000',
+      totalAmount: 23500,
+      customerNotes: 'Please call recipient prior to delivery.',
+      internalNotes: 'New high-value order awaiting dispatch confirmation.',
       items: {
         create: [
           {
-            productId: allProds[1].id,
-            name: allProds[1].name,
-            sku: allProds[1].sku,
-            price: 19800,
+            productId: createdProducts[11].id, // Celebration Hamper
+            name: createdProducts[11].name,
+            sku: createdProducts[11].sku,
+            price: 26000,
             quantity: 1,
-            subtotal: 19800,
-            imageUrl: JSON.parse(allProds[1].images)[0],
-          },
-          {
-            productId: allProds[6].id,
-            name: allProds[6].name,
-            sku: allProds[6].sku,
-            price: 8500,
-            quantity: 1,
-            subtotal: 8500,
-            imageUrl: JSON.parse(allProds[6].images)[0],
+            subtotal: 26000,
+            imageUrl: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=1200',
           },
         ],
-      },
-      payments: {
-        create: {
-          amount: 28550,
-          paymentMethod: 'COD',
-          status: 'PENDING',
-          notes: 'Pending delivery collection',
-        },
       },
     },
   });
 
-  // 8. Business Expenses
-  await prisma.expense.createMany({
+  // 8. Payment Transactions
+  await prisma.paymentTransaction.createMany({
     data: [
       {
-        title: 'Boutique Retail Lease - Dolmen Mall Lahore',
-        category: 'RENT',
-        amount: 350000,
-        date: new Date('2026-11-01'),
-        description: 'Monthly store rental for Artisha flagship boutique at Dolmen Mall Lahore.',
-        recordedBy: 'Syeda Fatima (CEO)',
+        orderId: order1.id,
+        amount: 16650,
+        paymentMethod: 'CASH_ON_DELIVERY',
+        transactionRef: 'COD-LHE-1001',
+        status: 'VERIFIED',
+        notes: 'Cash collected by TCS Express courier.',
       },
       {
-        title: 'Staff Salaries (Atelier Artisans & Sales Associates)',
-        category: 'SALARIES',
-        amount: 240000,
-        date: new Date('2026-11-05'),
-        description: 'Payroll for 6 boutique associates, master pattern cutters, and embroiderers.',
-        recordedBy: 'Hamza Malik (Operations)',
-      },
-      {
-        title: 'Raw Silk & Cashmere Fabric Procurement',
-        category: 'INVENTORY',
-        amount: 420000,
-        date: new Date('2026-11-08'),
-        description: 'Winter festive fabric intake: 200m raw silk and 50 cashmere pashmina blankets.',
-        recordedBy: 'Ayesha Tariq',
-      },
-      {
-        title: 'Instagram & Meta Editorial Ads Campaign',
-        category: 'MARKETING',
-        amount: 65000,
-        date: new Date('2026-11-12'),
-        description: 'High-intent digital awareness campaign targeting Lahore, Karachi, and Islamabad.',
-        recordedBy: 'Hamza Malik',
-      },
-      {
-        title: 'Custom Velvet Garment Bags & Magnetic Hardboxes',
-        category: 'PACKAGING',
-        amount: 45000,
-        date: new Date('2026-11-14'),
-        description: '500 embossed gold foil magnetic luxury gift boxes and 300 velvet dustbags.',
-        recordedBy: 'Hamza Malik',
-      },
-      {
-        title: 'TCS & Leopards Courier Account Logistics Invoice',
-        category: 'COURIER',
-        amount: 28500,
-        date: new Date('2026-11-16'),
-        description: 'Bi-weekly courier freight settlement for nationwide orders.',
-        recordedBy: 'Bilal Khan',
+        orderId: order2.id,
+        amount: 12950,
+        paymentMethod: 'BANK_TRANSFER',
+        transactionRef: 'MEEZAN-IBFT-88492019',
+        bankAccount: 'Meezan Bank Ltd (PK92MEZN00018928374)',
+        status: 'VERIFIED',
+        notes: 'Online IBFT transfer verified with Meezan Bank statement.',
       },
     ],
   });
 
-  // 9. Notifications
-  await prisma.notification.createMany({
+  // 9. Expenses (Operational cost tracking)
+  await prisma.expense.createMany({
     data: [
       {
-        type: 'STOCK_LOW',
-        title: 'Low Stock Alert',
-        message: 'Emerald Heritage Zardozi Bridal Peshwas (ART-PESH-003) has only 4 units remaining.',
-        link: '/admin/inventory',
-        isRead: false,
+        title: 'Dolmen Mall Lahore Boutique Monthly Lease (Nov 2026)',
+        category: 'BOUTIQUE_RENT',
+        amount: 280000,
+        date: new Date('2026-11-01'),
+        description: 'First Floor Shop 104, Dolmen Mall DHA Lahore lease payment.',
+        recordedBy: superAdmin.name,
       },
       {
-        type: 'ORDER_NEW',
-        title: 'New Order Received',
-        message: 'Order #ART-10023 received from Alizeh Chaudhry for Rs. 28,550 (Islamabad).',
-        link: '/admin/orders',
-        isRead: false,
+        title: 'Master Silversmiths & Inlay Artisans Honorarium',
+        category: 'ARTISAN_SALARIES',
+        amount: 195000,
+        date: new Date('2026-11-05'),
+        description: 'Wages for master jewellers, filigree artisans and sheesham woodcarvers.',
+        recordedBy: superAdmin.name,
       },
       {
-        type: 'CUSTOMER_NEW',
-        title: 'New VIP Customer Registration',
-        message: 'Zainab Qureshi registered an account with shipping address in DHA Lahore.',
-        link: '/admin/customers',
-        isRead: true,
+        title: 'Pure Freshwater Cultured Pearls & Uncut Polki Procurement',
+        category: 'INVENTORY_PROCUREMENT',
+        amount: 165000,
+        date: new Date('2026-11-10'),
+        description: 'Grade-A cultured pearls and uncut polki stones intake for jewellery collection.',
+        recordedBy: inventoryManager.name,
+      },
+      {
+        title: 'Rigid Gold Foil Gift Boxes & Velvet Pouches Batch',
+        category: 'PACKAGING',
+        amount: 48000,
+        date: new Date('2026-11-12'),
+        description: 'Debossed gold-foil gift boxes, satin ribbons, and padded jewellery suede pouches.',
+        recordedBy: orderManager.name,
+      },
+      {
+        title: 'TCS Logistics Nationwide Prepaid Shipping Wallet',
+        category: 'COURIER',
+        amount: 35000,
+        date: new Date('2026-11-15'),
+        description: 'Prepaid parcel dispatch credits for COD and online orders.',
+        recordedBy: orderManager.name,
       },
     ],
   });
@@ -875,52 +806,78 @@ async function main() {
         userId: superAdmin.id,
         userName: superAdmin.name,
         userRole: superAdmin.role,
-        action: 'UPDATE_ORDER_STATUS',
-        entityType: 'Order',
-        entityId: order1.id,
-        details: 'Order ART-10021 marked as DELIVERED after confirmation from TCS Express.',
-      },
-      {
-        userId: manager.id,
-        userName: manager.name,
-        userRole: manager.role,
-        action: 'VERIFY_PAYMENT',
-        entityType: 'PaymentTransaction',
-        entityId: order2.id,
-        details: 'Bank transfer receipt MEZN-TRX-839210 verified and approved.',
+        action: 'STORE_INITIALIZATION',
+        entityType: 'System',
+        details: 'Initialized Artisha digital commerce platform for jewellery, accessories and handmade gifts.',
       },
       {
         userId: inventoryManager.id,
         userName: inventoryManager.name,
         userRole: inventoryManager.role,
-        action: 'STOCK_ADJUSTMENT',
+        action: 'INVENTORY_RESTOCK',
         entityType: 'Product',
-        entityId: allProds[0].id,
-        details: 'Stock verified for Crimson Velvet Kurta Set across Small, Medium, and Large.',
+        entityId: createdProducts[0].id,
+        details: 'Restocked 12 units of Royal Polki & Pearl Choker Set.',
+      },
+      {
+        userId: orderManager.id,
+        userName: orderManager.name,
+        userRole: orderManager.role,
+        action: 'ORDER_DISPATCH',
+        entityType: 'Order',
+        entityId: order1.id,
+        details: 'Assigned TCS tracking TCS-LHE-9821447 and marked order as DELIVERED.',
       },
     ],
   });
 
-  // 11. Website Content Configurations
+  // 11. Notifications
+  await prisma.notification.createMany({
+    data: [
+      {
+        title: 'New High-Value Order #ART-2026-1003',
+        message: 'Order placed by Hira Naveed for The Imperial Celebration Gift Hamper (Rs. 23,500).',
+        type: 'ORDER_NEW',
+        link: `/admin/orders`,
+        isRead: false,
+      },
+      {
+        title: 'Low Stock Alert: Polki Bridal Matha Patti',
+        message: 'Only 7 pieces remaining in stock. Consider commissioning additional pieces from the atelier.',
+        type: 'STOCK_LOW',
+        link: `/admin/inventory`,
+        isRead: false,
+      },
+      {
+        title: 'Payment Verified: Order #ART-2026-1002',
+        message: 'Meezan Bank IBFT verified for Rs. 12,950 by Hamza Malik.',
+        type: 'PAYMENT_RECEIVED',
+        link: `/admin/payments`,
+        isRead: true,
+      },
+    ],
+  });
+
+  // 12. Website Content
   const websiteContent = {
     announcement: {
-      text: 'Visit our flagship boutique at Dolmen Mall Lahore | Enjoy complimentary nationwide delivery on orders over Rs. 10,000',
+      text: 'Visit our flagship boutique at Dolmen Mall Lahore | Handcrafted Jewellery, Bespoke Accessories & Artisanal Gifts',
       isActive: true,
       link: '/shop',
     },
     hero: {
-      tagline: 'AUTUMN / WINTER 2026 LUXURY ATELIER',
-      headline: 'The Poetry of Pakistani Craftsmanship',
-      subheadline: 'Artisanal couture, handwoven pashminas, and timeless heirlooms designed for the discerning modern connoisseur.',
-      primaryButtonText: 'Explore Collection',
+      tagline: 'AUTUMN / WINTER 2026 HEIRLOOM ATELIER',
+      headline: 'Handcrafted Jewellery, Accessories & Artisanal Gifts',
+      subheadline: 'Bespoke Polki jewels, embroidered velvet potlis, and handcrafted marble keepsakes from our boutique at Dolmen Mall Lahore.',
+      primaryButtonText: 'Explore Atelier',
       primaryButtonLink: '/shop',
       secondaryButtonText: 'Visit Dolmen Mall Boutique',
       secondaryButtonLink: '/contact',
-      imageUrl: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=1800',
+      imageUrl: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=1800',
     },
     storeInfo: {
       brandName: 'Artisha',
-      tagline: 'Curated Pret, Luxury Festive & Artisanal Heirlooms',
+      tagline: 'Handcrafted Jewellery, Bespoke Accessories & Handmade Gifts',
       address: 'Shop 104, First Floor, Dolmen Mall, Sector T, DHA Phase 6, Lahore, Pakistan',
       phone: '+92 300 8472910',
       whatsapp: '+92 300 8472910',
@@ -946,21 +903,26 @@ async function main() {
     });
   }
 
-  // 12. Newsletter Subscribers
+  // 13. Newsletter Subscribers
   await prisma.newsletterSubscriber.createMany({
     data: [
-      { email: 'sarah.malik@outlook.com' },
-      { email: 'anaya.khurram@gmail.com' },
-      { email: 'iman.hashmi@yahoo.com' },
+      { email: 'zainab.q@gmail.com' },
+      { email: 'amber.sheikh@hotmail.com' },
+      { email: 'mariam.khan@yahoo.com' },
+      { email: 'sarah.ahmed@gmail.com' },
     ],
   });
 
   console.log('Seeding completed successfully!');
+  console.log(`- Created 5 Staff & Customer Accounts`);
+  console.log(`- Created 4 Specialized Categories (Jewellery, Accessories, Handmade Gifts, Gift Hampers)`);
+  console.log(`- Created 12 Luxury Products with Full Variant & Stock Records`);
+  console.log(`- Created 9 Pakistan Shipping Zones, 4 Active Coupons, 3 Sample Orders, Expenses & Audit Logs`);
 }
 
 main()
   .catch((e) => {
-    console.error(e);
+    console.error('Seeding error:', e);
     process.exit(1);
   })
   .finally(async () => {

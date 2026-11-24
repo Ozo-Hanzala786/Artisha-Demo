@@ -3,22 +3,24 @@ import './globals.css';
 import AppShell from '@/components/AppShell';
 
 export const metadata: Metadata = {
-  title: 'Artisha | Luxury Pret, Festive Couture & Artisanal Heirlooms | Lahore',
+  title: 'Artisha | Handcrafted Jewellery, Bespoke Accessories & Handmade Gifts | Lahore',
   description:
-    'Artisha is a premier Pakistani fashion atelier based at Dolmen Mall Lahore. Discover handcrafted luxury pret, bridal peshwas, pure Himalayan pashmina shawls, and bespoke jewelry.',
+    'Artisha is an artisanal boutique atelier at Dolmen Mall Lahore. Discover heirloom Polki jewellery, Kundan earrings, handcrafted velvet potlis, zardozi clutches, and bespoke handmade gifts.',
   keywords: [
     'Artisha',
     'Artisha Lahore',
     'Dolmen Mall Lahore',
-    'Pakistani luxury fashion',
-    'handcrafted bridal wear',
-    'pure pashmina shawls',
-    'velvet kurtas',
-    'bespoke jewelry',
+    'handcrafted jewellery',
+    'Polki jewellery',
+    'Kundan earrings',
+    'velvet potli bags',
+    'handmade gifts Pakistan',
+    'luxury gift hampers',
+    'bespoke accessories',
   ],
   openGraph: {
-    title: 'Artisha | Luxury Pret & Artisanal Couture Lahore',
-    description: 'Curated Pakistani couture, artisanal shawls and bespoke heirlooms. Flagship boutique at Dolmen Mall Lahore.',
+    title: 'Artisha | Handcrafted Jewellery, Accessories & Handmade Gifts Lahore',
+    description: 'Bespoke Polki jewels, embroidered velvet accessories, and handcrafted gift heirlooms. Flagship boutique at Dolmen Mall Lahore.',
     url: 'https://artisha.pk',
     siteName: 'Artisha',
     type: 'website',

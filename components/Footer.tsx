@@ -45,7 +45,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-sm text-[#A89F91] leading-relaxed max-w-sm">
-              Artisha celebrates indigenous Pakistani craft heritage through meticulously tailored luxury pret, ceremonial festive couture, pure pashminas, and handcrafted heirloom jewelry.
+              Artisha celebrates Pakistani artisan heritage through handcrafted jewellery, bespoke accessories, and timeless handmade gifts. Visit our flagship boutique at Dolmen Mall Lahore.
             </p>
             <div className="pt-2 space-y-2 text-xs text-[#C5BDB2]">
               <div className="flex items-start gap-2.5">
@@ -74,28 +74,23 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2.5 text-sm text-[#A89F91]">
               <li>
-                <Link href="/shop?category=pret-ready-to-wear" className="hover:text-[#FAF8F5] transition-colors">
-                  Pret & Ready-to-Wear
+                <Link href="/shop?category=jewellery" className="hover:text-[#FAF8F5] transition-colors">
+                  Handcrafted Jewellery
                 </Link>
               </li>
               <li>
-                <Link href="/shop?category=luxury-festive" className="hover:text-[#FAF8F5] transition-colors">
-                  Luxury Festive Couture
+                <Link href="/shop?category=accessories" className="hover:text-[#FAF8F5] transition-colors">
+                  Bespoke Accessories
                 </Link>
               </li>
               <li>
-                <Link href="/shop?category=artisanal-shawls" className="hover:text-[#FAF8F5] transition-colors">
-                  Artisanal Shawls & Stoles
+                <Link href="/shop?category=handmade-gifts" className="hover:text-[#FAF8F5] transition-colors">
+                  Handmade Gifts & Keepsakes
                 </Link>
               </li>
               <li>
-                <Link href="/shop?category=handcrafted-accessories" className="hover:text-[#FAF8F5] transition-colors">
-                  Handcrafted Potlis & Bags
-                </Link>
-              </li>
-              <li>
-                <Link href="/shop?category=bespoke-jewelry" className="hover:text-[#FAF8F5] transition-colors">
-                  Polki & Silver Jewelry
+                <Link href="/shop?category=gift-hampers" className="hover:text-[#FAF8F5] transition-colors">
+                  Luxury Gift Hampers
                 </Link>
               </li>
               <li>

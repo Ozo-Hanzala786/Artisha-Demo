@@ -40,17 +40,20 @@ export default function AboutPage() {
               Preserving Living Craft Traditions
             </h2>
             <p>
-              Artisha was founded in Lahore with a singular conviction: that traditional craftsmanship should not be an endangered relic of museum archives, but a thriving, luxurious reality worn with pride.
+              Artisha was founded in Lahore with a singular conviction: that traditional craftsmanship should not be an endangered relic of museum archives, but a thriving, luxurious reality celebrated every day.
             </p>
             <p>
-              Every garment in our pret and ceremonial festive collections is shaped by generational artisans across Lahore, Multan, Taxila, and the Kashmir valleys. From hand-spun cashmere pashminas to 16-kali raw silk peshwas encrusted with authentic zardozi and antique tilla, each piece is a celebration of human skill.
+              We curate and handcraft three foundational pillars: <strong>Heirloom Jewellery</strong> (Polki chokers, Kundan chandbalis, 925 sterling silver filigree), <strong>Bespoke Accessories</strong> (hand-zardozi velvet potlis, raw silk minaudières, hair jewellery), and <strong>Artisanal Handmade Gifts</strong> (hand-carved sheesham keepsakes, lapis lazuli marble trays, hammered brass candles).
+            </p>
+            <p>
+              Every piece in our boutique is shaped by multigenerational silversmiths, embroiderers, and inlay masters across Lahore, Multan, Taxila, and Chiniot.
             </p>
           </div>
 
           <div className="relative aspect-[4/5] rounded-xs overflow-hidden bg-[#F5EFE6] border border-[#E6DFD5] shadow-xs">
             <img
-              src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&q=80&w=800"
-              alt="Artisha Master Craft"
+              src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=800"
+              alt="Artisha Master Jewellery & Keepsake Craft"
               className="w-full h-full object-cover"
             />
           </div>
@@ -62,21 +65,21 @@ export default function AboutPage() {
             <Award className="w-6 h-6 text-[#6B1724]" />
             <h3 className="font-serif-luxury text-base font-bold text-[#1F1D1D]">Authentic Materials</h3>
             <p className="text-xs text-[#7E7873] leading-relaxed">
-              We exclusively use pure natural fibers: Grade-A Himalayan cashmere wool, 80g pure raw silk, and hand-woven Chanderi cotton.
+              We exclusively use 22K gold plating, hallmarked 925 silver, natural cultured pearls, uncut polki stones, Makrana marble, and pure sheesham wood.
             </p>
           </div>
           <div className="p-6 bg-white border border-[#E6DFD5] rounded-xs space-y-2 shadow-xs">
             <Users className="w-6 h-6 text-[#6B1724]" />
             <h3 className="font-serif-luxury text-base font-bold text-[#1F1D1D]">Master Artisan Guild</h3>
             <p className="text-xs text-[#7E7873] leading-relaxed">
-              Our direct relationships with master embroiderers and weavers ensure ethical compensation, dignified working environments, and fair trade.
+              Our direct relationships with master silversmiths, zardozi needleworkers, and Chinioti woodcarvers ensure ethical compensation and fair trade.
             </p>
           </div>
           <div className="p-6 bg-white border border-[#E6DFD5] rounded-xs space-y-2 shadow-xs">
             <Heart className="w-6 h-6 text-[#6B1724]" />
-            <h3 className="font-serif-luxury text-base font-bold text-[#1F1D1D]">Timeless Heirlooms</h3>
+            <h3 className="font-serif-luxury text-base font-bold text-[#1F1D1D]">Bespoke Keepsakes</h3>
             <p className="text-xs text-[#7E7873] leading-relaxed">
-              We discard fast fashion cycles in favor of permanent elegance designed to be cherished, preserved, and handed down across generations.
+              Designed as meaningful gifts and heirloom treasures to be cherished, preserved, and handed down across family generations.
             </p>
           </div>
         </div>

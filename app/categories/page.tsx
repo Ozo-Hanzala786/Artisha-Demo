@@ -24,13 +24,13 @@ export default async function CategoriesPage() {
 
       <div className="text-center max-w-2xl mx-auto space-y-3">
         <span className="text-[11px] uppercase tracking-[0.25em] text-[#6B1724] font-semibold">
-          Curated Wardrobes
+          Atelier Categories
         </span>
         <h1 className="font-serif-luxury text-3xl sm:text-5xl font-bold text-[#1F1D1D]">
           Artisha Categories
         </h1>
         <p className="text-xs sm:text-sm text-[#7E7873] leading-relaxed">
-          From everyday hand-blocked pret to bespoke ceremonial couture and heritage cashmere stoles.
+          From heirloom Polki jewellery and embroidered velvet potlis to handcrafted sheesham keepsakes and bespoke gift hampers.
         </p>
       </div>
 
